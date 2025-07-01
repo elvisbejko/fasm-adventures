@@ -1,4 +1,4 @@
-format ELF64 executable 3
+format ELF64 executable
 entry start
 
 segment readable executable

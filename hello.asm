@@ -1,6 +1,8 @@
 ; https://board.flatassembler.net/topic.php?t=8506
 
-format ELF executable 3     ; 32bit ELF executable
+format ELF executable     ; 32bit ELF executable
+                          ; 3 means i3 processor
+                          ; defaults to x86_64
 
 segment readable executable
 
