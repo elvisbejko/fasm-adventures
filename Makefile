@@ -3,12 +3,16 @@ FASM_TAR := fasm.tgz
 FASM_DIR := fasm
 FASM_BIN := $(FASM_DIR)/fasm
 INSTALL_BIN := /usr/local/bin/fasm
-SRC := hello.asm
-OUT := hello
 
 .PHONY: all clean distclean
 
-all: $(OUT)
+# Collect all .asm files in current directory
+ASM_SOURCES := $(wildcard *.asm)
+
+# Define corresponding output binaries (no extension)
+OUTS := $(ASM_SOURCES:.asm=)
+
+all: $(OUTS)
 
 # Fallback path if fasm is not in PATH
 $(INSTALL_BIN):
@@ -22,17 +26,19 @@ $(INSTALL_BIN):
 FASM := $(shell which fasm 2>/dev/null)
 ifeq ($(FASM),)
 FASM := $(INSTALL_BIN)
-$(OUT): $(INSTALL_BIN)
+$(OUTS): $(INSTALL_BIN)
 endif
 
-$(OUT): $(SRC)
+# Pattern rule to build output from .asm source
+# $@ = target (output file), $< = first prerequisite (source .asm)
+%: %.asm
 	$(FASM) $<
 
-hexdump: $(OUT)
-	xxd -g1 $(OUT)
+hexdump: $(OUTS)
+	xxd -g1 $^
 
 clean:
-	rm -f $(OUT)
+	rm -f $(OUTS)
 
 distclean: clean
 	rm -f $(FASM_TAR)
