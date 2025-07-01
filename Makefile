@@ -34,8 +34,10 @@ endif
 %: %.asm
 	$(FASM) $<
 
-hexdump: $(OUTS)
-	xxd -g1 $^
+# Pattern rule to print hexdump of a binary
+.PHONY: hexdump-%
+hexdump-%:
+	xxd -g1 $*
 
 clean:
 	rm -f $(OUTS)
