@@ -17,7 +17,7 @@ all: $(OUTS)
 # Fallback path if fasm is not in PATH
 $(INSTALL_BIN):
 	@echo "fasm not found. Installing system-wide..."
-	wget -q $(FASM_URL) -O $(FASM_TAR)
+	wget --show-progress $(FASM_URL) -O $(FASM_TAR)
 	tar -xzf $(FASM_TAR)
 	sudo install -m 755 $(FASM_BIN) $(INSTALL_BIN)
 	rm -rf $(FASM_TAR) 
