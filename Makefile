@@ -39,7 +39,7 @@ hexdump-%:
 	xxd -g1 $*
 
 clean:
-	rm -f $(OUTS)
+	rm -f $(OUTS) *.bin
 
 distclean: clean
 	rm -f $(FASM_TAR)
