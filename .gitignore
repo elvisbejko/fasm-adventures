@@ -1,4 +1,5 @@
 *.bin
+console
 hello
 reverse
 fasm
